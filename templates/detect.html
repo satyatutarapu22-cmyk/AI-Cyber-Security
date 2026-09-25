@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block content %}<h1>Threat Detection</h1><p class="muted">Enter a network-flow sample for educational classification.</p>
+<div class="two"><div class="panel"><h2>Network Data</h2><form method="post" class="form-grid">
+<label>Source IP<input name="src_ip" value="192.168.1.10" required></label><label>Destination IP<input name="dst_ip" value="10.0.0.5" required></label>
+<label>Protocol<select name="protocol"><option>TCP</option><option>UDP</option><option>ICMP</option></select></label><label>Port<input type="number" name="port" value="443" required></label>
+<label>Packets<input type="number" name="packets" value="120" required></label><label>Bytes<input type="number" name="bytes" value="45000" required></label>
+<label>Duration (sec)<input type="number" step="0.1" name="duration" value="8.2" required></label><div></div><button>Analyze Traffic</button></form></div>
+{% if result %}<div class="result {{result.severity|lower}}"><h2>Detection Result</h2><div class="result-type">{{result.attack_type}}</div><p>Confidence: <b>{{(result.confidence*100)|round(1)}}%</b></p><p>Severity: <b>{{result.severity}}</b></p>{% if result.attack_type!='Normal' %}<p>⚠️ An alert was created in the system.</p>{% else %}<p>✓ No immediate threat detected.</p>{% endif %}</div>{% endif %}</div>{% endblock %}

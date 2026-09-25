@@ -1,0 +1,6 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CyberShield AI</title><link rel="stylesheet" href="{{url_for('static',filename='style.css')}}"></head>
+<body><header><div class="brand">🛡️ CyberShield AI</div>
+{% if session.get('user_id') %}<nav><a href="/dashboard">Dashboard</a><a href="/detect">Detect</a><a href="/alerts">Alerts</a><a href="/reports">Reports</a>{% if session.get('role')=='admin' %}<a href="/admin">Admin</a>{% endif %}<a href="/logout">Logout</a></nav>{% endif %}</header>
+{% with messages=get_flashed_messages(with_categories=true) %}{% for cat,msg in messages %}<div class="flash {{cat}}">{{msg}}</div>{% endfor %}{% endwith %}
+<main>{% block content %}{% endblock %}</main><footer>CyberShield AI • Educational Final-Year Project</footer></body></html>

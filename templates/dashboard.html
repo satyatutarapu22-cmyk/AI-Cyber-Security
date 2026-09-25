@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block content %}<h1>Security Dashboard</h1><p class="muted">Welcome, {{session.username}}. Monitor network activity and detected threats.</p>
+<div class="cards"><div class="card"><span>Network Logs</span><b>{{stats.logs}}</b></div><div class="card"><span>Threats</span><b>{{stats.threats}}</b></div><div class="card"><span>Open Alerts</span><b>{{stats.alerts}}</b></div><div class="card danger-card"><span>Critical</span><b>{{stats.critical}}</b></div></div>
+<div class="panel"><div class="panel-head"><h2>Recent Network Activity</h2><a class="btn" href="/detect">Analyze Traffic</a></div>
+<table><tr><th>Source</th><th>Destination</th><th>Protocol</th><th>Port</th><th>Attack</th><th>Severity</th></tr>
+{% for r in recent %}<tr><td>{{r.src_ip}}</td><td>{{r.dst_ip}}</td><td>{{r.protocol}}</td><td>{{r.port}}</td><td>{{r.attack_type or '—'}}</td><td><span class="badge {{(r.severity or 'Low')|lower}}">{{r.severity or '—'}}</span></td></tr>{% endfor %}</table></div>{% endblock %}
